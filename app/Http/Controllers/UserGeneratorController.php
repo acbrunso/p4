@@ -51,7 +51,7 @@ class UserGeneratorController extends Controller {
      */
     public function store(Request $request)
     {
-
+/*
       DB::table('customers')->insert([
         'created_at' => Carbon\Carbon::now()->toDateTimeString(),
         'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
@@ -65,11 +65,12 @@ class UserGeneratorController extends Controller {
         'hosting_plan' => 0,
         'server_plan' => 0,
       ]);
+*/
+      $user = DB::table('customers')->get();
 
-      $customers = DB::table('customers')->get();
 
       // Output the results
-      foreach ($customers as $customerObj) {
+      foreach ($user as $customerObj) {
         $customer= $customerObj->last_name;
       }
       return View('UserGeneratorView', ['customer' => $customer,

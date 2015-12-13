@@ -23,12 +23,27 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $table = 'users';
 
+
+    public function hosting_plan() {
+      return $this->belongsTo('\App\HostingPlan');
+    }
+
+    
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['last_name',
+                           'first_name',
+                           'street_address',
+                           'city',
+                           'state',
+                           'zip',
+                           'hosting_plan_id',
+                           'server_plan_id',
+                           'email',
+                           'password'];
 
     /**
      * The attributes excluded from the model's JSON form.

@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Faker\Factory as Faker;
 require_once '../vendor/fzaninotto/faker/src/autoload.php';
 
-class PlansController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,13 @@ class PlansController extends Controller
      */
     public function index()
     {
-        $hostingPlans = \App\HostingPlan::all();
-        $serverPlans = \App\ServerPlan::all();
-        return View('PlansView', ['hostingPlans' => $hostingPlans, 'serverPlans' => $serverPlans]);
+        if(!\Auth::check()) {
+          \Session::flash('flash_message','You have to be logged in to add a new plan');
+          return redirect('/');
+        }
+
+        $user = \Auth::user();
+        return View('ProfileView', ['user' => $user]);
     }
 
     /**
@@ -41,20 +45,29 @@ class PlansController extends Controller
     public function store(Request $request)
     {
       $user = \Auth::user();
+      //$planSelect = \App\HostingPlan::where('id', '=', $request->id)->first();
 
-      # Give it a different title
-      //$user->hosting_plan()->associate();
-      if(isset($request->hPlan)) {
-        $user->hosting_plan_id = $request->hPlan;
+      //$plan = Auth::user();
+      if(isset($request->save)) {
+        //echo "here";
+        $user->last_name = $request->last_name;
+        $user->first_name = $request->first_name;
+        $user->street_address = $request->street_address;
+        $user->city = $request->city;
+        $user->state = $request->state;
+        $user->zip = $request->zip;
+        $user->email = $request->email;
+        $user->save();
+        \Session::flash('flash_message','Your profile has been updated');
       }
       else {
-        $user->server_plan_id = $request->sPlan;
+        $user->delete();
+        \Session::flash('flash_message','Your Account has been deleted');
+        return redirect()->guest('/login');
       }
+      //$planSelect = \App\HostingPlan::where('id', '=', $request->planSelect)->first();
 
-      $user->save();
-      $hostingPlans = \App\HostingPlan::all();
-      $serverPlans = \App\ServerPlan::all();
-      return View('PlansView', ['hostingPlans' => $hostingPlans, 'serverPlans' => $serverPlans]);
+      return View('ProfileView', ['user' => $user]);
     }
 
     /**

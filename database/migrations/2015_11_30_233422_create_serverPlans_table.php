@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCustomersTable extends Migration
+class CreateServerPlansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateCustomersTable extends Migration
      */
     public function up()
     {
-      Schema::create('customers', function (Blueprint $table) {
+      Schema::create('server_plans', function (Blueprint $table) {
 
       # Increments method will make a Primary, Auto-Incrementing field.
       # Most tables start off this way
@@ -23,20 +23,14 @@ class CreateCustomersTable extends Migration
       $table->timestamps();
 
       # The rest of the fields...
-      $table->string('username');
-      $table->string('last_name');
-      $table->string('first_name');
-      $table->string('street_address');
-      $table->string('city');
-      $table->string('state');
-      $table->integer('zip');
-      $table->integer('hosting_plan');
-      $table->integer('server_plan');
+      $table->string('ram');
+      $table->string('storage');
+      $table->string('bandwidth');
+      $table->string('type');
+      $table->string('OS');
+    });
 
 
-      # FYI: We're skipping the 'tags' field for now; more on that later.
-
-  });
 
     }
 
@@ -47,7 +41,6 @@ class CreateCustomersTable extends Migration
      */
     public function down()
     {
-      Schema::drop('customers');
-
+      Schema::drop('server_plans');
     }
 }

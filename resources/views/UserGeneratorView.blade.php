@@ -5,26 +5,15 @@
   <?php
   isset($customer) ? $n= $customer : $n= 'no';
   echo $n;
-  //isset($request->numOfUsers) ? $n=$request->numOfUsers : $n=1;
-  //echo Form::selectRange('numOfUsers', 1, 20,  $n, ['id'=>'numOfUsers']) . "   ";
-  //echo Form::label('lastName', 'Last Name');
-  //echo '<br><br>';
-  //isset($request->birthdate) ? $selected=true : $selected=false;
-	//echo Form::checkbox('birthdate', 'birthdate', $selected, ['id'=>'birthdate']);
-  //echo Form::label('birthdate', 'Birthdate');
-  //echo '<br>';
-  //isset($request->address) ? $selected=true : $selected=false;
+
+
+  
   ?>
-  <div class=>
+
+
+  <div class="left">
   <table style="width:40%">
-    <tr>
-      <td>
-        {!! Form::label('username',  'User Name') !!}
-      </td>
-      <td>
-        {!! Form::text('username', '',['id'=>'userName']) !!}
-      </td>
-    </tr>
+
     <tr>
       <td>
         {!! Form::label('lastName',  'Last Name') !!}
@@ -79,27 +68,31 @@
     </td>
   </table>
 </div>
-<div>
-  <table>
-    <tr>
-      <td>
-        {!! Form::label('zip', 'Zip'); !!}
-      </td>
-      <td>
-        {!! Form::text('zip', '',['id'=>'zip']); !!}
-      </td>
-    </tr>
-  </table>
-</div>
-  <?php
-
-
-
-
-
-
-  ?>
 {!! Form::close() !!}
+<div class="center">
+<form method='POST' action='/login'>
+
+    {!! csrf_field() !!}
+
+    <div class='form-group'>
+        <label for='email'>Email</label>
+        <input type='text' name='email' id='email' value='{{ old('email') }}'>
+    </div>
+
+    <div class='form-group'>
+        <label for='password'>Password</label>
+        <input type='password' name='password' id='password' value='{{ old('password') }}'>
+    </div>
+
+    <div class='form-group'>
+        <input type='checkbox' name='remember' id='remember'>
+        <label for='remember' class='checkboxLabel'>Remember me</label>
+    </div>
+
+    <button type='submit' class='btn btn-primary'>Login</button>
+
+</form>
+</div>
 
 
 @stop

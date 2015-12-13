@@ -10,16 +10,34 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-//require_once '../vendor/fzaninotto/faker/src/autoload.php';
 
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 Route::resource('/plans', 'PlansController');
+Route::resource('/updateplans', 'UpdatePlansController');
 Route::resource('/about', 'AboutController');
-Route::resource('/user-generator', 'UserGeneratorController');
-Route::get('/new', array('as' => 'new_person', 'uses'=>'SignUpController@neww'));
-Route::post('create', array('uses'=>'SignUpController@create'));
+Route::resource('/profile', 'ProfileController');
+//Route::resource('/user-generator', 'UserGeneratorController');
+//Route::get('/new', array('as' => 'new_person', 'uses'=>'SignUpController@neww'));
+//Route::post('create', array('uses'=>'SignUpController@create'));
 
+/**/
+# Show login form
+Route::get('/login', 'Auth\AuthController@getLogin');
+
+# Process login form
+Route::post('/login', 'Auth\AuthController@postLogin');
+
+# Process logout
+Route::get('/logout', 'Auth\AuthController@getLogout');
+
+# Show registration form
+//Route::get('/register', 'Auth\AuthController@getRegister');
+
+# Process registration form
+Route::post('/register', 'Auth\AuthController@postRegister');
+
+/**/
 
 Route::get('/debug', function() {
 

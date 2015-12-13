@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Faker\Factory as Faker;
-require_once '../vendor/fzaninotto/faker/src/autoload.php';
 
-class PlansController extends Controller
+class UpdatePlansController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +15,14 @@ class PlansController extends Controller
      */
     public function index()
     {
-        $hostingPlans = \App\HostingPlan::all();
-        $serverPlans = \App\ServerPlan::all();
-        return View('PlansView', ['hostingPlans' => $hostingPlans, 'serverPlans' => $serverPlans]);
+        if(!\Auth::check()) {
+          \Session::flash('flash_message','You have to be logged in to add a new plan');
+          return redirect('/');
+        }
+
+        $planSelect = \App\HostingPlan::first();
+        //echo $user->hosting_plan->websites;
+        return View('UpdatePlansView', ['planSelect' => $planSelect, 'id' => '1']);
     }
 
     /**
@@ -40,21 +43,24 @@ class PlansController extends Controller
      */
     public function store(Request $request)
     {
-      $user = \Auth::user();
+      $planSelect = \App\HostingPlan::where('id', '=', $request->id)->first();
 
-      # Give it a different title
-      //$user->hosting_plan()->associate();
-      if(isset($request->hPlan)) {
-        $user->hosting_plan_id = $request->hPlan;
-      }
-      else {
-        $user->server_plan_id = $request->sPlan;
+      //$plan = Auth::user();
+      if(isset($request->save)) {
+
+        $planSelect->websites = $request->websites;
+        $planSelect->storage = $request->storage;
+        $planSelect->bandwidth = $request->bandwidth;
+        $planSelect->emails = $request->emails;
+        $planSelect->OS = $request->OS;
+        \Session::flash('flash_message','The plan has been updated');
+        $planSelect->save();
       }
 
-      $user->save();
-      $hostingPlans = \App\HostingPlan::all();
-      $serverPlans = \App\ServerPlan::all();
-      return View('PlansView', ['hostingPlans' => $hostingPlans, 'serverPlans' => $serverPlans]);
+      //$planSelect = \App\HostingPlan::where('id', '=', $request->planSelect)->first();
+
+
+      return View('UpdatePlansView', ['request' => $request, 'id' => $planSelect->id, 'planSelect' => $planSelect]);
     }
 
     /**
@@ -65,7 +71,6 @@ class PlansController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**
@@ -88,8 +93,6 @@ class PlansController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        return "testing update";
     }
 
     /**

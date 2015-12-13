@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'http:p3.anthonybrunson.me',
+    'url' => 'http://p4.anthonybrunson.me',
 
     /*
     |--------------------------------------------------------------------------
@@ -199,7 +199,6 @@ return [
 
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        'Logic' => App\Http\Logic::class,
 
 
     ],

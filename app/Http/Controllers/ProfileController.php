@@ -46,7 +46,7 @@ class ProfileController extends Controller
     {
       $user = \Auth::user();
       //$planSelect = \App\HostingPlan::where('id', '=', $request->id)->first();
-
+ echo "<script>alert&#40;&#39;alert text&#39;&#41;</script>&#34;";
       //$plan = Auth::user();
       if(isset($request->save)) {
         //echo "here";
@@ -61,6 +61,7 @@ class ProfileController extends Controller
         \Session::flash('flash_message','Your profile has been updated');
       }
       else {
+
         $user->delete();
         \Session::flash('flash_message','Your Account has been deleted');
         return redirect()->guest('/login');

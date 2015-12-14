@@ -6,9 +6,13 @@
   <link rel="stylesheet" type="text/css" href="styles/style.css">
 </head>
 <body style="background-color:#E0F0FF">
-  @if(Session::has('message'))
-    <p style-"color: green;">{{ Session::get('message') }} </p>
+  @if(Session::has('flash_message'))
+    <p style="color: green;background-color:yellow;">{{ Session::get('flash_message') }} </p>
     @endif
+
+
+
+
   <div id="header">
     <h1>Brunstar Hosting</h1>
   </div>

@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(HostingPlansTableSeeder::class);
         $this->call(ServerPlansTableSeeder::class);
         $this->call(UsersTableSeeder::class);
+        $this->call(StatesTableSeeder::class);
 
         Model::reguard();
     }

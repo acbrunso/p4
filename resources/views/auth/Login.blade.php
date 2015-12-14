@@ -55,7 +55,18 @@
 
       <label for='state'>
         <span>State</span>
-        {!! Form::text('state', '',['id'=>'state']); !!}
+      <?php $states = \App\State::all(); ?>
+      <select name="state">
+        @foreach($states as $stateEntry)
+          <option value= "{{ $stateEntry->state }}"
+            @if(isset( $state ))
+             @if( $stateEntry->state == $state )
+              selected="selected"
+             @endif
+            @endif
+     > {{ $stateEntry->state }}</option>
+        @endforeach
+      </select>
       </label>
 
       <label for='zip'>

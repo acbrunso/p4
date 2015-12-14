@@ -15,7 +15,7 @@
       if( $j == $id ): ?>
         selected="selected"
 <?php endif;
-    } ?>> <? >{{ $j }}</option>
+    } ?>>  {{ $j }}</option>
   @endfor
 </select>
 

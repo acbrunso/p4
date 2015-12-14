@@ -4,6 +4,7 @@
 
 
 
+
     @if(count($errors) > 0)
         <ul class='errors'>
             @foreach ($errors->all() as $error)

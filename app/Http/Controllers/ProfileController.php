@@ -63,11 +63,14 @@ class ProfileController extends Controller
         \Session::flash('flash_message','Your profile has been updated');
         return View('ProfileView', ['user' => $user]);
       }
-      else {
+
+      if(isset($request->delete)) {
         return View('DeleteConfirmView', ['user' => $user]);
-        //$user->delete();
-        //\Session::flash('flash_message','Your Account has been deleted');
-        //return redirect()->guest('/login');
+      }
+      if(isset($request->yes)) {
+        $user->delete();
+        \Session::flash('flash_message','Your Account has been deleted');
+        return redirect()->guest('/login');
       }
       //$planSelect = \App\HostingPlan::where('id', '=', $request->planSelect)->first();
 

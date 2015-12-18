@@ -5,7 +5,7 @@
 
 
 <div class="center">
-    <form action="ProfileView" method="post" class="basic-grey">
+    <form action="profile" method="post" class="basic-grey">
       {!! csrf_field() !!}
       <h1>Confirm Account Deletion
         <span>Are you sure you wish to delete your account?  This cannot be undone.</span>

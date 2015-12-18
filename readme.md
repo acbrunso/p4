@@ -13,6 +13,9 @@ This project is a web hosting site that allow users to register and select a hos
 ## Details for teaching team
 username: jill@harvard.edu
 password: helloworld
+
+username: jamal@harvard.edu
+password: helloworld
 you can also create a new account by going through the registration procedure
 
 ## Outside code

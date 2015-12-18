@@ -17,7 +17,7 @@ class ProfileController extends Controller
     public function index()
     {
         if(!\Auth::check()) {
-          \Session::flash('flash_message','You have to be logged in to add a new plan');
+          \Session::flash('flash_message','You have to be logged in to view your profile');
           return redirect('/');
         }
 
@@ -108,8 +108,6 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        return "testing update";
     }
 
     /**

@@ -57,9 +57,6 @@ class UpdatePlansController extends Controller
         $planSelect->save();
       }
 
-      //$planSelect = \App\HostingPlan::where('id', '=', $request->planSelect)->first();
-
-
       return View('UpdatePlansView', ['request' => $request, 'id' => $planSelect->id, 'planSelect' => $planSelect]);
     }
 
